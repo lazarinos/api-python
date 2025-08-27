@@ -239,6 +239,7 @@ def internal_error(error):
     }), 500
 
 if __name__ == '__main__':
+    import os
     print("🚀 Iniciando Quizizz Answers API Service")
     print("⚠️  Para uso en testing de seguridad autorizado")
     print("📡 Servicio web con bypass automático de IP")
@@ -249,17 +250,14 @@ if __name__ == '__main__':
     print("  POST /answers              - Obtener respuestas (POST)")
     print("  GET  /health               - Health check")
     print()
-    print("🌐 Ejemplos de uso:")
-    print("  curl http://localhost:5000/answers/4656829")
-    print('  curl -X POST http://localhost:5000/answers -H "Content-Type: application/json" -d \'{"room_code":"4656829"}\'')
-    print()
-    print("🔓 Servicio iniciando en http://localhost:5000")
+    print("🔓 Servicio iniciando...")
     print("=" * 60)
     
-    # Ejecutar servidor Flask
+    # Ejecutar servidor Flask (para desarrollo local)
+    port = int(os.environ.get('PORT', 5000))
     app.run(
-        host='0.0.0.0',  # Accesible desde cualquier IP
-        port=5000,       # Puerto estándar
-        debug=False,     # Sin debug en producción
-        threaded=True    # Soporte para múltiples requests concurrentes
+        host='0.0.0.0',
+        port=port,
+        debug=False,
+        threaded=True
     )
